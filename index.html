@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name - Salesforce Admin Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+       /* Basic Reset & Global Styles */
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       body {
+           font-family: 'Roboto', sans-serif;
+           line-height: 1.6;
+           color: #333;
+           background-color: #f4f4f4;
+           display: flex;
+           flex-direction: column;
+           min-height: 100vh;
+       }
+       .container {
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 20px;
+       }
+       /* Header */
+       header {
+           background: #2c3e50; /* Dark blue/grey */
+           color: #fff;
+           padding: 1rem 0;
+           text-align: center;
+           box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+       }
+       header h1 {
+           font-size: 2.5rem;
+           margin-bottom: 0.5rem;
+       }
+       header p {
+           font-size: 1.2rem;
+           opacity: 0.9;
+       }
+       /* Navigation */
+       nav ul {
+           list-style: none;
+           padding: 0;
+           display: flex;
+           justify-content: center;
+           gap: 20px;
+           margin-top: 15px;
+       }
+       nav ul li a {
+           color: #fff;
+           text-decoration: none;
+           font-weight: bold;
+           transition: color 0.3s ease;
+       }
+       nav ul li a:hover {
+           color: #1abc9c; /* Teal */
+       }
+       /* Sections General */
+       section {
+           padding: 40px 0;
+           background-color: #fff;
+           margin-bottom: 20px;
+           box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+       }
+       section h2 {
+           text-align: center;
+           font-size: 2rem;
+           color: #2c3e50;
+           margin-bottom: 30px;
+           position: relative;
+       }
+       section h2::after {
+           content: '';
+           position: absolute;
+           bottom: -10px;
+           left: 50%;
+           transform: translateX(-50%);
+           width: 60px;
+           height: 3px;
+           background-color: #1abc9c;
+           border-radius: 5px;
+       }
+       /* About Section */
+       #about p {
+           text-align: center;
+           max-width: 800px;
+           margin: 0 auto;
+           font-size: 1.1rem;
+           color: #555;
+       }
+       /* Skills Section */
+       #skills .skills-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+           gap: 25px;
+           padding: 0 20px;
+       }
+       #skills .skill-item {
+           background-color: #ecf0f1; /* Light grey */
+           padding: 25px;
+           border-radius: 8px;
+           text-align: center;
+           box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+       }
+       #skills .skill-item:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+       }
+       #skills .skill-item h3 {
+           color: #34495e; /* Darker blue/grey */
+           margin-bottom: 10px;
+           font-size: 1.3rem;
+       }
+       /* Projects Section */
+       #projects .project-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+           gap: 30px;
+           padding: 0 20px;
+       }
+       #projects .project-card {
+           background-color: #ecf0f1;
+           border-radius: 8px;
+           overflow: hidden;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between; /* Pushes button to bottom */
+       }
+       #projects .project-card:hover {
+           transform: translateY(-8px);
+           box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+       }
+       #projects .project-card img {
+           width: 100%;
+           height: 200px; /* Fixed height for project images */
+           object-fit: cover;
+           border-bottom: 1px solid #ddd;
+       }
+       #projects .project-card-content {
+           padding: 20px;
+           flex-grow: 1; /* Allows content to take available space */
+       }
+       #projects .project-card h3 {
+           color: #2c3e50;
+           font-size: 1.5rem;
+           margin-bottom: 10px;
+       }
+       #projects .project-card p {
+           color: #555;
+           font-size: 0.95rem;
+           margin-bottom: 15px;
+       }
+       #projects .project-card .btn {
+           display: inline-block;
+           background-color: #1abc9c;
+           color: #fff;
+           padding: 10px 18px;
+           border-radius: 5px;
+           text-decoration: none;
+           font-weight: bold;
+           transition: background-color 0.3s ease;
+           text-align: center;
+           width: fit-content; /* Make button fit content */
+           margin-top: auto; /* Pushes button to bottom */
+       }
+       #projects .project-card .btn:hover {
+           background-color: #16a085; /* Darker teal */
+       }
+       /* Contact Section */
+       #contact .contact-info {
+           text-align: center;
+           font-size: 1.1rem;
+           color: #555;
+       }
+       #contact .contact-info p {
+           margin-bottom: 10px;
+       }
+       #contact .contact-info a {
+           color: #1abc9c;
+           text-decoration: none;
+           font-weight: bold;
+           transition: color 0.3s ease;
+       }
+       #contact .contact-info a:hover {
+           color: #16a085;
+           text-decoration: underline;
+       }
+       /* Footer */
+       footer {
+           background: #34495e;
+           color: #fff;
+           text-align: center;
+           padding: 20px 0;
+           margin-top: auto; /* Pushes footer to the bottom */
+           box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+       }
+       /* Responsive Design */
+       @media (max-width: 768px) {
+           header h1 {
+               font-size: 2rem;
+           }
+           header p {
+               font-size: 1rem;
+           }
+           nav ul {
+               flex-direction: column;
+               gap: 10px;
+           }
+           section h2 {
+               font-size: 1.8rem;
+           }
+           #skills .skills-grid,
+           #projects .project-grid {
+               grid-template-columns: 1fr;
+           }
+       }
+       @media (max-width: 480px) {
+           .container {
+               padding: 10px;
+           }
+           header h1 {
+               font-size: 1.8rem;
+           }
+           header p {
+               font-size: 0.9rem;
+           }
+           nav ul li a {
+               font-size: 0.9rem;
+           }
+           section {
+               padding: 30px 0;
+           }
+       }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<h1>Your Name</h1>
+<p>Salesforce Administrator | Automation & Data Management Enthusiast</p>
+<nav>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main>
+<section id="about" class="container">
+<h2>About Me</h2>
+<p>
+               As a passionate Salesforce Administrator, I specialize in leveraging the platform to optimize business processes, enhance user experience, and drive data-driven decisions. My expertise spans automation, robust data management, seamless integrations, and ensuring compliance. I am dedicated to fostering user adoption through effective change management and empowering teams with insightful reports and dashboards. I'm always eager to take on new challenges and build innovative solutions within the Salesforce ecosystem.
+</p>
+</section>
+<section id="skills" class="container">
+<h2>My Skills</h2>
+<div class="skills-grid">
+<div class="skill-item">
+<h3>Salesforce Automation</h3>
+<p>Flow, Process Builder, Workflow Rules, Approval Processes, Escalation Rules</p>
+</div>
+<div class="skill-item">
+<h3>Data Management & Analytics</h3>
+<p>Data Loader, Data Import Wizard, Deduplication, Data Cleansing, Reporting, Dashboards</p>
+</div>
+<div class="skill-item">
+<h3>Integration Expertise</h3>
+<p>API Integrations (REST/SOAP), AppExchange Solutions, Connector Configuration</p>
+</div>
+<div class="skill-item">
+<h3>Change Management & User Adoption</h3>
+<p>Training, Documentation, User Enablement, Release Management</p>
+</div>
+<div class="skill-item">
+<h3>Security & Compliance</h3>
+<p>Profiles, Permission Sets, Sharing Rules, Org-Wide Defaults, Field Level Security</p>
+</div>
+<div class="skill-item">
+<h3>Reports & Dashboards</h3>
+<p>Custom Report Types, Formula Fields, Dynamic Dashboards, Analytic Snapshots</p>
+</div>
+<div class="skill-item">
+<h3>Testing & Deployment</h3>
+<p>Sandbox Management, Change Sets, VS Code, User Acceptance Testing (UAT)</p>
+</div>
+<div class="skill-item">
+<h3>Admin Best Practices</h3>
+<p>System Maintenance, Troubleshooting, User Support, Documentation</p>
+</div>
+</div>
+</section>
+<section id="projects" class="container">
+<h2>My Projects</h2>
+<div class="project-grid">
+<div class="project-card">
+<img src="https://via.placeholder.com/400x200?text=Project+Image+1" alt="Project 1 Image">
+<div class="project-card-content">
+<h3>Automated Lead Assignment System</h3>
+<p>Designed and implemented a complex Salesforce Flow to automatically assign new leads based on custom criteria (e.g., industry, region, lead source), reducing manual effort by 70% and improving response times.</p>
+<a href="#" class="btn">View Details</a>
+</div>
+</div>
+<div class="project-card">
+<img src="https://via.placeholder.com/400x200?text=Project+Image+2" alt="Project 2 Image">
+<div class="project-card-content">
+<h3>Custom Object & Data Migration</h3>
+<p>Developed a custom object to track customer support cases with unique fields, then executed a data migration of historical case data from a legacy system using Data Loader, ensuring data integrity and accessibility.</p>
+<a href="#" class="btn">View Details</a>
+</div>
+</div>
+<div class="project-card">
+<img src="https://via.placeholder.com/400x200?text=Project+Image+3" alt="Project 3 Image">
+<div class="project-card-content">
+<h3>Salesforce Integration with Marketing Cloud</h3>
+<p>Configured and managed the integration between Salesforce Sales Cloud and Marketing Cloud, enabling seamless data flow for targeted email campaigns and improved customer journey tracking.</p>
+<a href="#" class="btn">View Details</a>
+</div>
+</div>
+<div class="project-card">
+<img src="https://via.placeholder.com/400x200?text=Project+Image+4" alt="Project 4 Image">
+<div class="project-card-content">
+<h3>Enhanced Reporting & Dashboard Suite</h3>
+<p>Built a series of dynamic reports and dashboards for the sales team, providing real-time insights into pipeline health, sales performance, and forecasting, leading to more informed strategic decisions.</p>
+<a href="#" class="btn">View Details</a>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" class="container">
+<h2>Get In Touch</h2>
+<div class="contact-info">
+<p>Feel free to connect with me to discuss Salesforce opportunities, collaborations, or just to say hello!</p>
+<p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+<p>Trailhead: <a href="https://trailblazer.me/id/yourtrailheadid" target="_blank">trailblazer.me/id/yourtrailheadid</a></p>
+</div>
+</section>
+</main>
+<footer>
+<div class="container">
+<p>&copy; 2025 Your Name. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>
